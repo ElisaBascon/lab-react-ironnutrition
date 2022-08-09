@@ -5,6 +5,7 @@ import foods from './foods.json';
 import { useState } from 'react';
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
+import Search from 'antd/lib/transfer/search';
 
 
 function App() {
@@ -21,15 +22,23 @@ function App() {
     const updateFood = [...foods];
     updateFood.push(food);
     setFoods(updateFood);
-  }  
+  }
+
+  const handleSearch = (searchValue) =>{
+    if (searchValue === '') {
+      setFoods(foods)
+    } else {
+      const filtered = food.filter(elem => elem.name.toLowerCase().includes(searchValue));
+      setFoods(filtered)
+    } }
+  
 
   return (
   <div className="App">
 
-
-
-
     <h1>Food List</h1>
+
+    <Search onSearch={handleSearch} />
 
     {food.map((elem) => {
       return(
