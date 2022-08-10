@@ -1,8 +1,8 @@
 // src/App.js
 import React from 'react';
+import { useState } from 'react';
 import './App.css';
 import foods from './foods.json';
-import { useState } from 'react';
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
 import Search from 'antd/lib/transfer/search';
@@ -10,7 +10,8 @@ import Search from 'antd/lib/transfer/search';
 
 function App() {
 
-  const [food, setFoods] = useState(foods)
+  const [food, setFoods] = useState(foods);
+  const [searchFood, setSearchFood] = useState(foods);
 
   const handleDelete = (name) => {
     const filtered = food.filter(elem => elem.name !==name);
@@ -18,19 +19,16 @@ function App() {
   }
 
   const handleNewFood = (food) => {
-    food.name = food.length +1;
-    const updateFood = [...foods];
-    updateFood.push(food);
+    const updateFood = [...foods, food];
     setFoods(updateFood);
   }
 
   const handleSearch = (searchValue) =>{
-    if (searchValue === '') {
-      setFoods(foods)
-    } else {
-      const filtered = food.filter(elem => elem.name.toLowerCase().includes(searchValue));
-      setFoods(filtered)
-    } }
+    let filtered = food.filter((food) => 
+    food.name.toLowerCase().includes(Search.toLowerCase())
+    );
+    setSearchFood(filtered);
+  }
   
 
   return (
