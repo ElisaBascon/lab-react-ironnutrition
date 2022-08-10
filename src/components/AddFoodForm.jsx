@@ -10,8 +10,19 @@ export default function AddFoodForm (props) {
         servings: ''
     })
 
-    const handleForm = (elem) => {
-        elem.preventDefault();
+
+    const handleChange = (e) => {
+        const conditionalValue = e.target.name === 'calories' ? parseInt(e.target.value) : e.target.value;
+        setFood(prev => {
+            return {
+                ...prev,
+                [e.target.name]: conditionalValue
+            }
+        })
+    }
+
+    const handleForm = (e) => {
+        e.preventDefault();
         newFood(food);
         setFood({
             name: '',
@@ -21,23 +32,14 @@ export default function AddFoodForm (props) {
         })
     }
 
-    const handleChange = (elem) => {
-        const conditionalValue = elem.target.name === 'name' ? parseInt(elem.target.value) : elem.target.value;
-        setFood(prev => {
-            return {
-                ...prev,
-                [elem.target.name]: conditionalValue
-            }
-        })
-    }
-
     return (
         <div>
+            <h3>Add new Food</h3>
             <form onSubmit={handleForm}>
-                <input type="text" placeholder="Name" name="name" value={food.name} onChange={(elem) => handleChange(elem)}/>
-                <input type="text" placeholder="Image Url" name="image" value={food.image} onChange={(elem) => handleChange(elem)}/>
-                <input type="text" placeholder="Calories" name="calories" value={food.calories} onChange={(elem) => handleChange(elem)}/>
-                <input type="text" placeholder="Servings" name="servings" value={food.servings} onChange={(elem) => handleChange(elem)}/>
+                <input type="text" placeholder="Name" name="name" value={food.name} onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder="Image Url" name="image" value={food.image} onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder="Calories" name="calories" value={food.calories} onChange={(e) => handleChange(e)}/>
+                <input type="text" placeholder="Servings" name="servings" value={food.servings} onChange={(e) => handleChange(e)}/>
                 <button type="submit">Save new task</button>
             </form>
         </div>

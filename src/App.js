@@ -1,4 +1,8 @@
-// src/App.js
+/* ESTE ES EL CODDIGO DE FORM QUE PETA 
+  {showFood && <AddFoodForm newFood={handleNewFood} />}
+  <button onClick={() => setShowFood(prev => !prev)}>{!showFood ? "Add new food" : "Hide form" }</button> */
+
+
 import React from 'react';
 import { useState } from 'react';
 import './App.css';
@@ -12,6 +16,7 @@ function App() {
 
   const [food, setFoods] = useState(foods);
   const [searchFood, setSearchFood] = useState(foods);
+  const [showFood, setShowFood] = useState(foods);
 
   const handleDelete = (name) => {
     const filtered = food.filter(elem => elem.name !==name);
@@ -19,11 +24,12 @@ function App() {
   }
 
   const handleNewFood = (food) => {
-    const updateFood = [...foods, food];
+    const updateFood = [...foods];
+    updateFood.push(food);
     setFoods(updateFood);
   }
 
-  const handleSearch = (searchValue) =>{
+  const handleSearch = (food) =>{
     let filtered = food.filter((food) => 
     food.name.toLowerCase().includes(Search.toLowerCase())
     );
@@ -32,6 +38,7 @@ function App() {
   
 
   return (
+  
   <div className="App">
 
     <h1>Food List</h1>
