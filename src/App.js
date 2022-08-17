@@ -30,7 +30,7 @@ function App() {
   }
 
   const handleSearch = (food) =>{
-    let filtered = food.filter((food) => 
+    let filtered = [...food].filter((food) => 
     food.name.toLowerCase().includes(Search.toLowerCase())
     );
     setSearchFood(filtered);

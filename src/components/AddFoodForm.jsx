@@ -1,9 +1,9 @@
-import React, { useSate } from "react";
+import React, { useState } from "react";
 
 export default function AddFoodForm (props) {
     const { newFood } = props;
 
-    const [food, setFood] = useSate({
+    const [food, setFood] = useState({
         name: '',
         image: '',
         calories: '',
